@@ -119,17 +119,21 @@ router.get("/transportation", pagesController.showTransportation); // 교통수�
  * Listing 23.2 (p. 335)
  * app.js로 로그인 라우트를 추가
  */
-
+router.get("/users/login",usersController.login);
+router.post("/users/login",
+  usersController.authenticate,
+  usersController.redirectView
+); 
 /**
  * Users
  */
 router.get("/users", usersController.index, usersController.indexView); // index 라우트 생성
 router.get("/users/new", usersController.new); // 생성 폼을 보기 위한 요청 처리
 router.post(
-  "/users/create",
+  "/users/create", 
   usersController.validate, // Listing 23.6 (p. 344) - 사용자 생성 라우트에 유효성 체크 미들웨어 추가
   usersController.create,
-  usersController.redirectView
+  usersController.redirectView 
 ); // 생성 폼에서 받아온 데이터의 처리와 결과를 사용자 보기 페이지에 보여주기
 router.get("/users/:id", usersController.show, usersController.showView);
 router.get("/users/:id/edit", usersController.edit); // viewing을 처리하기 위한 라우트 추가
